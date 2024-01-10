@@ -66,7 +66,7 @@ func SelectAll() (string, error) {
 			id, company, model string
 		)
 		err = rows.Scan(&id, &company, &model)
-		v += fmt.Sprintf("%v  %v %v %v\n", id, company, model)
+		v += fmt.Sprintf("%v  %v %v\n", id, company, model)
 		if err != nil {
 			return v, err
 		}
@@ -100,11 +100,7 @@ func SelectAllByIdsArray(ids []int) (string, error) {
 			)
 			err = rows.Scan(&company, &model, &producer, &country, &price, &date)
 			year, month, day := date.Date()
-			if len(price) > 3 {
-				price = price[:len(price)-3]
-
-			}
-			v += fmt.Sprintf("%v %v %v    %v-%v-%v   %v   %v\n", company, model, country, year, month, day, producer, price)
+			v += fmt.Sprintf("\n%v %v %v %v-%v-%v %v %v\n", company, model, country, year, month, day, producer, price)
 			if err != nil {
 				return v, err
 			}
